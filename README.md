@@ -1,10 +1,10 @@
 # Aerolite on AWS
 
-Call Microsoft Powershell commands on AWS Windows EC2 instances easily. This uses the 
+Call Microsoft Powershell commands on AWS Windows EC2 instances easily.
 
 # Requirements
 
-AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. This port must be open. P
+AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. This port must be open.
 
 # How to Use
 
