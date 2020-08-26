@@ -1,0 +1,376 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Description: >- Aerolite -  Run PowerShell Serverlessly on your Windows EC2, no agent required.
+
+Transform: AWS::Serverless-2016-10-31
+
+Resources:
+
+  MyStateMachine:
+    Type: AWS::StepFunctions::StateMachine
+    Properties:
+      StateMachineName: Aerolite-PowerShell
+      DefinitionString: |-
+        {
+          "StartAt": "Parse PowerShell Commands",
+          "States": {
+            "Parse PowerShell Commands": {
+              "Type": "Task",
+              "Resource": "${LambdaParsePowerShellFunction}",
+              "Next": "Map"
+            },
+            "Map": {
+              "Type": "Map",
+              "Parameters": {
+                "psCommand.$": "$$.Map.Item.Value",
+                "ec2Id.$": "$$.Execution.Input.ec2Id"
+              },
+              "ItemsPath": "$.psCommand",
+              "ResultPath": "$.psCommand",
+              "MaxConcurrency": 1,
+              "Next": "Finish",
+              "Iterator": {
+                "StartAt": "PowerShell Task",
+                "States": {
+                  "PowerShell Task": {
+                    "Type": "Task",
+                    "Resource": "${LambdaRunPowerShellFunction}",
+                    "Retry": [
+                      {
+                        "ErrorEquals": [
+                          "RetryException"
+                        ],
+                        "IntervalSeconds": 5,
+                        "MaxAttempts": 3,
+                        "BackoffRate": 2
+                      }
+                    ],
+                    "Catch": [
+                      {
+                        "ErrorEquals": [
+                          "RebootException"
+                        ],
+                        "Next": "Reboot Task"
+                      }
+                    ],
+                    "End": true
+                  },
+                  "Reboot Task": {
+                    "Type": "Task",
+                    "Parameters": {
+                      "ec2Id.$": "$$.Execution.Input.ec2Id"
+                    },
+                    "Resource": "${LambdaCheckWindowsMachineFunction}",
+                    "Retry": [
+                      {
+                        "ErrorEquals": [
+                          "NoWindowsResponse"
+                        ],
+                        "IntervalSeconds": 60,
+                        "MaxAttempts": 60,
+                        "BackoffRate": 1
+                      }
+                    ],
+                    "End": true
+                  }
+                }
+              }
+            },
+            "Finish": {
+              "Type": "Pass",
+              "End": true
+            }
+          }
+        }
+      DefinitionSubstitutions:
+        LambdaParsePowerShellFunction:
+          Fn::GetAtt:
+            - LambdaParsePowerShell
+            - Arn
+        LambdaRunPowerShellFunction:
+          Fn::GetAtt:
+            - LambdaRunPowerShell
+            - Arn
+        LambdaCheckWindowsMachineFunction:
+          Fn::GetAtt:
+            - LambdaCheckWindowsMachine
+            - Arn
+      RoleArn:
+        Fn::GetAtt:
+          - StepFunctionsLambdaRole
+          - Arn
+
+  LambdaParsePowerShell:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AeroliteParsePowerShellScript
+      Description: Parses PowerShell to from text file
+      AutoPublishAlias: live
+      Handler: index.lambda_handler
+      Runtime: python3.7
+      Timeout: 900
+      Role:
+        Fn::GetAtt:
+          - LambdaSSMRole
+          - Arn
+      InlineCode: |
+        import json
+        import boto3
+        import re
+
+        class FileNotFound(Exception): pass
+        class ErrorResponse(Exception): pass
+
+        def lambda_handler(event, context):
+
+            s3Client = boto3.resource('s3')
+
+            print(event)
+
+            try:
+                psFile = s3Client.Object(event['Bucket'], event['Key'])
+            except botocore.exceptions.ClientError as e:
+                if e.response['Error']['Code'] == "404":
+                    raise FileNotFound("The File Was Not Found")
+                else:
+                    raise ErrorResponse(e.response['Error'])
+
+            body = psFile.get()['Body'].read().decode('utf-8')
+
+            body = re.sub(re.compile("/\*.*?\*/",re.DOTALL ), "", body)
+            body = re.sub(re.compile("#.*?\n"), "", body)
+
+            list = []
+
+            for line in body.splitlines():
+                if line.rstrip():
+                    list.append(line)
+
+            return {
+                'psCommand': list
+            }
+
+  LambdaRunPowerShell:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AeroliteRunPowerShell
+      Description: Passes PowerShell to SSM Agent
+      AutoPublishAlias: live
+      Handler: index.lambda_handler
+      Runtime: python3.7
+      Timeout: 900
+      Role:
+        Fn::GetAtt:
+          - LambdaSSMRole
+          - Arn
+      InlineCode: |
+        import json
+        import boto3
+        import time
+
+        class RebootException(Exception): pass
+        class RetryException(Exception): pass
+        class UnknownException(Exception): pass
+
+        def lambda_handler(event, context):
+
+            ec2Id = event['ec2Id']
+            psCommand = event['psCommand']
+
+            ssm_client = boto3.client('ssm')
+
+            response = execute_commands_on_windows_instances(ssm_client, [psCommand], [ec2Id], True)
+
+            if("Restart-Computer" in psCommand):
+
+                time.sleep(60)
+                raise RebootException("Windows Needs to Restart")
+
+                return "RebootException raised"
+
+            commandId = response['Command']['CommandId']
+
+            for i in range(120):
+                time.sleep(5)
+
+                response = ssm_client.get_command_invocation(CommandId=commandId,
+                    InstanceId=ec2Id)
+
+                status = response['Status']
+                print(response)
+
+                if(status == 'Success'):
+                    if("FullyQualifiedErrorId" in response['StandardErrorContent']):
+                        raise UnknownException(response['StandardErrorContent'])
+                        return "Standard Error"
+                    else:
+                        return "Success" + " : " + response['StandardOutputContent']
+                elif(status == 'Failed' or
+                     status == 'Terminated' or
+                     status == 'Canceled'):
+                    raise RetryException("PowerShell Command Failed, Terminated or Canceled")
+                    return "Failed"
+
+            raise RetryException("PowerShell Command Timed Out")
+            return "RetryException"
+
+
+        def execute_commands_on_windows_instances(client, commands, instance_ids, cloudWatchOutputEnabled):
+
+            resp = client.send_command(
+                DocumentName="AWS-RunPowerShellScript",
+                Parameters={'commands': commands},
+                InstanceIds=instance_ids,
+                CloudWatchOutputConfig = {
+                    'CloudWatchLogGroupName': 'WindowsEC2response',
+                    'CloudWatchOutputEnabled': cloudWatchOutputEnabled
+                }
+            )
+            return resp
+
+  LambdaCheckWindowsMachine:
+    Type: AWS::Serverless::Function
+    Properties:
+      FunctionName: AeroliteWindowsMachineAvailable
+      Description: Check to see if Windows has finished reboot
+      AutoPublishAlias: live
+      Handler: index.lambda_handler
+      Runtime: python3.7
+      Timeout: 900
+      Role:
+        Fn::GetAtt:
+          - LambdaSSMRole
+          - Arn
+      InlineCode: |
+        import json
+        import boto3
+        import time
+
+        class NoWindowsResponse(Exception): pass
+
+        def lambda_handler(event, context):
+
+            ec2Id = event['ec2Id']
+
+            ssm_client = boto3.client('ssm')
+
+            response = ssm_client.describe_instance_information(
+                    Filters=[{"Key":"InstanceIds","Values":[ec2Id]}], MaxResults=5)
+
+            PingStatus = response['InstanceInformationList'][0]['PingStatus']
+
+            if(PingStatus != "Online"):
+                raise NoWindowsResponse("PingStatus is " + PingStatus)
+
+            response = execute_commands_on_windows_instances(ssm_client, ['Write-Host "MS Windows Reboot"'], [ec2Id], False)
+
+            commandId= response['Command']['CommandId']
+
+
+            for i in range(12):
+                time.sleep(5)
+
+                response = ssm_client.get_command_invocation(CommandId=commandId,
+                    InstanceId=ec2Id)
+
+                status = response['Status']
+
+                if(status == 'Success'):
+                    return "Powershell is available on the Windows Machine"
+                elif(status == 'Failed' or
+                     status == 'Terminated' or
+                     status == 'Canceled'):
+                    raise NoWindowsResponse("status = " + status)
+                    return False
+
+            raise NoWindowsResponse("Time out after successful ping.")
+
+            return False
+
+
+        def execute_commands_on_windows_instances(client, commands, instance_ids, cloudWatchOutputEnabled):
+
+            resp = client.send_command(
+                DocumentName="AWS-RunPowerShellScript",
+                Parameters={'commands': commands},
+                InstanceIds=instance_ids,
+                CloudWatchOutputConfig = {
+                    'CloudWatchLogGroupName': 'WindowsEC2response',
+                    'CloudWatchOutputEnabled': cloudWatchOutputEnabled
+                }
+            )
+            return resp
+
+  LambdaSSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: Aerolite-ssm-role-for-lambda
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+            - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+              - lambda.amazonaws.com
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSLambdaExecute
+        - arn:aws:iam::aws:policy/AmazonS3FullAccess
+        - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+      Path: /
+
+  StepFunctionsLambdaRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName:
+        Fn::Sub: Aerolite-ssm-role-for-step-function
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+            - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+              - states.amazonaws.com
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AWSLambdaExecute
+        - arn:aws:iam::aws:policy/AmazonSSMFullAccess
+      Path: /
+      Policies:
+      - PolicyDocument:
+          Statement:
+          - Action:
+            - lambda:InvokeFunction
+            Effect: Allow
+            Resource: '*'
+          Version: '2012-10-17'
+        PolicyName: LambdaInvokeFunctionPolicy
+
+  EC2SSMRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: SSMRoleForInstancesQuickSetup
+      Description: SSMRoleForInstancesQuickSetup
+      AssumeRolePolicyDocument:
+        Statement:
+          - Action:
+            - sts:AssumeRole
+            Effect: Allow
+            Principal:
+              Service:
+              - ec2.amazonaws.com
+        Version: 2012-10-17
+      ManagedPolicyArns:
+        - arn:aws:iam::aws:policy/AmazonSSMManagedInstanceCore
+      Path: /
+
+  InstanceProfile:
+    Type: "AWS::IAM::InstanceProfile"
+    Properties:
+      InstanceProfileName: SSMRoleForInstancesQuickSetup
+      Path: "/"
+      Roles:
+        -
+          Ref: EC2SSMRole
