@@ -2,7 +2,7 @@
 
 Run Microsoft Powershell commands on AWS Windows EC2 instances easily. 
 
-Aerolite retries any failed PowerShell commands and logs all issues to CloudWatch.
+Aerolite retries any failed PowerShell commands and logs all issues to CloudWatch. It runs agent-free.
 
 # Requirements
 
