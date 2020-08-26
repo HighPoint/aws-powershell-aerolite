@@ -4,7 +4,9 @@ Call Microsoft Powershell commands on AWS Windows EC2 instances easily.
 
 # Requirements
 
-AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. This port must be open.
+AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. This port must be open. 
+
+The EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMRoleForInstancesQuickSetup, is included in the YAML Cloudformation template. SSMRoleForInstancesQuickSetup uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 after running the Cloudformation template, select 
 
 # How to Use
 
@@ -37,7 +39,7 @@ The Python Files -
  runWindowsPowerShell.py
 ```
   
-are included inline in the yaml Cloudformation template. They are include here for reference.
+are included inline in the YAML Cloudformation template. They are include here for reference.
 
 
 Happy Coding!
