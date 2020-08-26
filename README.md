@@ -7,9 +7,11 @@ An agent free way to call Microsoft Powershell commands on AWS Windows EC2 insta
 
 The Python Files:
 
-```   isWindowsMachineAvailable.py
-    parsePowerShellFile.py
-    runWindowsPowerShell.py`
+```   
+ isWindowsMachineAvailable.py
+ parsePowerShellFile.py
+ runWindowsPowerShell.py
+```
   
-are included inline in the Cloudformation yaml template. They are include here for reference.
+are included inline in the yaml Cloudformation template. They are include here for reference.
   
