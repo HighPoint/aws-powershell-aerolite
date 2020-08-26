@@ -29,9 +29,15 @@ is include in as demo. This file will -
 - Install Firefox
 - Clean up
 
-# Python Files
+# AWS Step Functions and AWS Lambda Python Files
 
-The files -
+The Step Function file is include inline in the YAML Cloudformation template. It is also found here -
+
+```
+  AWSPowerShellAerolite.json
+```
+
+The AWS Lambda files -
 
 ```   
  isWindowsMachineAvailable.py
