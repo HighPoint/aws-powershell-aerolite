@@ -35,13 +35,13 @@ is include in as demo. This file will -
 
 # AWS Step Functions and AWS Lambda Python Files
 
-The Step Function file is include inline in the YAML Cloudformation template. It is also found here -
+The Step Function file is include inline in the YAML Cloudformation template.
 
 ```
   AWSPowerShellAerolite.json
 ```
 
-The AWS Lambda files -
+The AWS Lambda files are included inline in the YAML Cloudformation template.
 
 ```   
  isWindowsMachineAvailable.py
@@ -49,7 +49,7 @@ The AWS Lambda files -
  runWindowsPowerShell.py
 ```
   
-are included inline in the YAML Cloudformation template. They are include here for reference.
+They are include here for reference.
 
 
 Happy Coding!
