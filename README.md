@@ -10,12 +10,12 @@ AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. T
 
 # Samples
 
-A file:
+A file
 ```
 SampleCommands.txt
 ```
 
-is include in as demo. This file will:
+is include in as demo. This file will
 
 - Change the Time Zone to Eastern Standard Time
 - Rename the Computer to "WS2019-01"
@@ -29,7 +29,7 @@ is include in as demo. This file will:
 
 # Python Files
 
-The Python Files:
+The Python Files
 
 ```   
  isWindowsMachineAvailable.py
