@@ -1,12 +1,16 @@
 # Aerolite on AWS
 
-Call Microsoft Powershell commands on AWS Windows EC2 instances easily.
+Run Microsoft Powershell commands on AWS Windows EC2 instances easily. 
+
+Aerolite retries any failed PowerShell commands and logs all issues to CloudWatch.
 
 # Requirements
 
-AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. This port must be open. 
+Aerolite is agent free, because it accesses the AWS System Manager install along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. Port 443 must be open. 
 
-The EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMRoleForInstancesQuickSetup, is included in the YAML Cloudformation template. SSMRoleForInstancesQuickSetup uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 after running the Cloudformation template, select 
+The EC2 also must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMRoleForInstancesQuickSetup, is included in the YAML Cloudformation template. SSMRoleForInstancesQuickSetup uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 after running the Cloudformation template, select 
+
+
 
 # How to Use
 
