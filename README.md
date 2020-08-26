@@ -31,7 +31,7 @@ is include in as demo. This file will -
 
 # Python Files
 
-The Python Files -
+The files -
 
 ```   
  isWindowsMachineAvailable.py
