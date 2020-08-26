@@ -8,7 +8,7 @@ AWS System Manager uses port 443 to communicate with the Windows EC2 Instance. T
 
 # How to Use
 
-# Sample Commands
+# Samples
 
 A file:
 ```
@@ -17,12 +17,15 @@ SampleCommands.txt
 
 is include in as demo. This file will:
 
-1. Change the Time Zone to Eastern Standard Time
-2. Rename the Computer to "WS2019-01"
-3. Restart the Computer
-4. Install Remote Server Admin Tools for Active Directory
-5. Restart the Computer
-6. 
+- Change the Time Zone to Eastern Standard Time
+- Rename the Computer to "WS2019-01"
+- Restart the Computer
+- Install Remote Server Admin Tools for Active Directory
+- Restart the Computer (again)
+- Create a directory "c:\installer"
+- Copy Firefox Installer to the directory
+- Install Firefox
+- Clean up
 
 # Python Files
 
