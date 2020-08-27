@@ -14,10 +14,6 @@ Easily add Aerolite to a Cloudformation stack.
 
 # Requirements
 
-- **Port 443 must be open.**
-
-Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for HTTPS traffic.
-
 - **The Windows EC2 IAM role must include the AmazonSSMManagedInstanceCore policy**
 
 The EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMRoleForInstancesQuickSetup, is included in the YAML Cloudformation template. SSMRoleForInstancesQuickSetup uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 manually after running the Cloudformation template, select: 
@@ -25,6 +21,14 @@ The EC2 must have an IAM role that allows the AWS System Manager to communicate 
 ![SSMRoleForInstancesQuickSetup](/images/ScreenShot.png?raw=true)
 
 Otherwise, add the IAM role to the EC2 instance.
+
+- **Port 443 must be open.**
+
+Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for HTTPS traffic. If you are creating an EC2 manually, select:
+
+![Security Group Port 443](/images/SecurityGroupShot.png?raw=true)
+
+If you use Remote Desktop Protocol, RDP Port 3389 should also be opened.
 
 # How to Use
 
