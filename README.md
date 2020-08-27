@@ -4,6 +4,8 @@ Run Microsoft Powershell commands on AWS Windows EC2 instances easily.
 
 Aerolite retries any failed PowerShell commands and logs all issues to CloudWatch. It runs agent-free.
 
+![Aerolite Step Functions Graph](https://github.com/HighPoint/aws-powershell-aerolite/tree/master/images/aerolite_graph.png)
+
 # Requirements
 
 Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. Port 443 must be open. 
