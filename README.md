@@ -45,7 +45,7 @@ A demo which will:
 
 # AWS Step Functions and AWS Lambda Python Files
 
-The Step Function file is include inline in the YAML Cloudformation template.
+The Step Function file is included inline in the YAML Cloudformation template.
 
 ```
   AWSPowerShellAerolite.json
