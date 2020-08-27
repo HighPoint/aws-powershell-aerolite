@@ -16,7 +16,7 @@ Easily add Aerolite to a Cloudformation stack.
 
 - **Port 443 must be open.**
 
-Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for https traffic.
+Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for HTTPS traffic.
 
 - **The Windows EC2 IAM role must include the AmazonSSMManagedInstanceCore policy**
 
