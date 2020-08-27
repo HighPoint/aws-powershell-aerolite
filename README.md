@@ -32,6 +32,17 @@ A demo which will:
 - Install Firefox
 - Clean up
 
+```
+SampleUpdate.txt
+```
+
+A demo which will:
+
+- Download all pending updates
+- Install NuGet
+- Install PSWindowsUpdate
+- Install all pending updates
+
 # AWS Step Functions and AWS Lambda Python Files
 
 The Step Function file is include inline in the YAML Cloudformation template.
