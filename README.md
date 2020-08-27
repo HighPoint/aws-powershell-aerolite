@@ -32,7 +32,7 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 # How to Use
 
-[![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?/stacks/new?stackName=AeroliteStack&templateURL=https://raw.githubusercontent.com/HighPoint/aws-powershell-aerolite/master/AWSPowerShellAerolite.yaml?raw=true)
+[![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
 
 # Samples
 
