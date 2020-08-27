@@ -1,5 +1,5 @@
-AWSTemplateFormatVersion: '2010-09-09'
-Description: >- Aerolite -  Run PowerShell Serverlessly on your Windows EC2, no agent required.
+AWSTemplateFormatVersion: 2010-09-09
+Description: Aerolite - Run PowerShell Serverlessly on your Windows EC2, agent-free.
 
 Transform: AWS::Serverless-2016-10-31
 
@@ -351,8 +351,8 @@ Resources:
   EC2SSMRole:
     Type: AWS::IAM::Role
     Properties:
-      RoleName: SSMRoleForInstancesQuickSetup
-      Description: SSMRoleForInstancesQuickSetup
+      RoleName: SSMInstancesQuickSetupRole
+      Description: SSMInstancesQuickSetupRole
       AssumeRolePolicyDocument:
         Statement:
           - Action:
@@ -369,7 +369,7 @@ Resources:
   InstanceProfile:
     Type: "AWS::IAM::InstanceProfile"
     Properties:
-      InstanceProfileName: SSMRoleForInstancesQuickSetup
+      InstanceProfileName: SSMInstancesQuickSetupRole
       Path: "/"
       Roles:
         -
