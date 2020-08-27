@@ -24,6 +24,8 @@ Otherwise, add the IAM role to the EC2 instance.
 
 # How to Use
 
+[![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://www.google.com)
+
 # Samples
 
 ```
