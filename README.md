@@ -28,11 +28,11 @@ Aerolite is agent-free, because it accesses the AWS System Manager installed alo
 
 ![Security Group Port 443](/images/SecurityGroupShot.png?raw=true)
 
-If you use Remote Desktop Protocol, RDP Port 3389 should also be opened.
+If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your IP address or addresses.
 
 # How to Use
 
-[![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?/stacks/new?stackName=AeroliteStack&templateURL=https://s3.amazonaws.com/samplecfntemplates/mytemplate.template)
+[![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?/stacks/new?stackName=AeroliteStack&templateURL=https://raw.githubusercontent.com/HighPoint/aws-powershell-aerolite/master/AWSPowerShellAerolite.yaml?raw=true)
 
 # Samples
 
