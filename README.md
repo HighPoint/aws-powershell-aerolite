@@ -42,6 +42,7 @@ A demo which will:
 - Install NuGet
 - Install PSWindowsUpdate
 - Install all pending updates
+- Restart the Computer
 
 # AWS Step Functions and AWS Lambda Python Files
 
