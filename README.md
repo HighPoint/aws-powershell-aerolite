@@ -8,7 +8,7 @@ Aerolite retries any failed PowerShell commands, logs all issues to CloudWatch a
 ![Aerolite Step Functions Graph](/images/aerolite_graph.png?raw=true)
 
 
-First, Aerolite opens a text file in an S3 bucket. It removes the comments, creating a list of commands. Next, Aerolite executes each PowerShell command individually. It waits for confirmation that the command successfully executed or failed. If the command failed, it will retry the command up to three times. Aerolite then logs all issues to a CloudWatch Log. If the command requires an EC2 restart, Aerolite will wait for the EC2 to be available for PowerShell commands. 
+First, Aerolite opens a text file in an S3 bucket. It removes the comments, creating a list of commands. Next, Aerolite executes each PowerShell command individually. It waits for confirmation that the command successfully executed or failed. If the command failed, it will retry the command up to three times. Aerolite then logs all issues to a CloudWatch Log. If the command requires an Windows restart, Aerolite will wait for the EC2 to be available for PowerShell commands. 
 
 Easily add Aerolite to a Cloudformation stack.
 
