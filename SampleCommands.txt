@@ -14,18 +14,6 @@ Rename-Computer -NewName "WS2019-01"
 Restart-Computer -Force
 
 
-# Check for updates and reboot
-
-# $U = Start-WUScan; If($U) {Install-WUUpdates -Updates $U -DownloadOnly $True}
-
-# Install-PackageProvider -Name NuGet -MinimumVersion 2.8.5.201 -Force
-
-# Install-Module -Name PSWindowsUpdate -Force
-
-# If (Get-WUList) {Install-WindowsUpdate -AcceptAll -Install}
-
-# Restart-Computer -Force
-
 
 # Install Remote Server Admin Tools for Active Directory
 
