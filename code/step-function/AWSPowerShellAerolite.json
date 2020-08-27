@@ -1,0 +1,75 @@
+{
+  "Comment": "AWS Step Function example using Map State as a loop through an input JSON array.
+  While Map State can manage multiple threads concurrently, it can also be used for a sequential task.
+  This example uses multiple AWS Lambda to pass Microsoft PowerShell commands to an EC2 instance. The Step
+  Function waits for the command to execute, retries if necessary, or passes the error message back.
+  If the Restart-Computer PowerShell command is used, the Step Function waits for the reboot before
+  continuing to the next step. Version 1.0",
+
+  "StartAt": "Map",
+  "States": {
+
+    "Map": {
+      "Type": "Map",
+      "Parameters": {
+        "psCommand.$": "$$.Map.Item.Value",
+        "ec2Id.$": "$$.Execution.Input.ec2Id"
+      },
+      "ItemsPath": "$.psCommand",
+      "ResultPath": "$.psCommand",
+      "MaxConcurrency": 1,
+      "Next": "Finish",
+
+      "Iterator": {
+        "StartAt": "Windows Task",
+        "States": {
+          "Windows Task": {
+            "Type": "Task",
+            "Resource": "${LambdaRunPowerShellFunction}",
+            "Retry": [
+              {
+                "ErrorEquals": [
+                  "RetryException"
+                ],
+                "IntervalSeconds": 5,
+                "MaxAttempts": 3,
+                "BackoffRate": 2
+              }
+            ],
+            "Catch": [
+              {
+                "ErrorEquals": [
+                  "RebootException"
+                ],
+                "Next": "Reboot Task"
+              }
+            ],
+            "End": true
+          },
+          "Reboot Task": {
+            "Type": "Task",
+            "Parameters": {
+              "ec2Id.$": "$$.Execution.Input.ec2Id"
+            },
+            "Resource": "arn:aws:lambda:us-east-1:728403011040:function:isWindowsMachineAvailable",
+            "Retry": [
+              {
+                "ErrorEquals": [
+                  "NoWindowsResponse"
+                ],
+                "IntervalSeconds": 60,
+                "MaxAttempts": 60,
+                "BackoffRate": 1
+              }
+            ],
+            "End": true
+          }
+        }
+      }
+    },
+    "Finish": {
+      "Type": "Pass",
+      "End": true
+    }
+  }
+}
