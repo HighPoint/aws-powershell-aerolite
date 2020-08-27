@@ -14,6 +14,8 @@ The EC2 also must have an IAM role that allows the AWS System Manager to communi
 
 ![SSMRoleForInstancesQuickSetup](/images/ScreenShot.png?raw=true)
 
+Otherwise, add the IAM role to the EC2 instance.
+
 # How to Use
 
 # Samples
