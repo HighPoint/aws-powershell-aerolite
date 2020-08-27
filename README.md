@@ -14,7 +14,11 @@ Easily add Aerolite to a Cloudformation stack.
 
 # Requirements
 
-Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. **Port 443 must be open.** 
+- **Port 443 must be open.**
+
+Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances.  
+
+- **The Windows EC2 must have an IAM role that includes the AmazonSSMManagedInstanceCore policy**
 
 The EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMRoleForInstancesQuickSetup, is included in the YAML Cloudformation template. SSMRoleForInstancesQuickSetup uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 after running the Cloudformation template, select: 
 
