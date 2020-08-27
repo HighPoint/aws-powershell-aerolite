@@ -16,12 +16,11 @@ The EC2 also must have an IAM role that allows the AWS System Manager to communi
 
 # Samples
 
-A file -
 ```
 SampleCommands.txt
 ```
 
-is include in as demo. This file will - 
+A demo which will: 
 
 - Change the Time Zone to Eastern Standard Time
 - Rename the Computer to "WS2019-01"
