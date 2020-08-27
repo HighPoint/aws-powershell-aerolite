@@ -1,0 +1,42 @@
+/*  This allows multiple line C style comments
+    It also allows the # style comments at the beginning of lines */
+
+
+# First Change the Time Zone
+
+Set-TimeZone -Id "Eastern Standard Time" -PassThru
+
+
+# Rename the Computer - this requires a Reboot
+
+Rename-Computer -NewName "WS2019-01"
+
+Restart-Computer -Force
+
+
+
+# Install Remote Server Admin Tools for Active Directory
+
+Add-WindowsFeature -Name "RSAT-AD-PowerShell" –IncludeAllSubFeature
+
+Restart-Computer -Force
+
+
+# Install Firefox version 79 (the latest version as of 8/11/20)
+
+# 1) Create a working directory $workdir
+
+$workdir = "c:\installer\";If (Test-Path -Path $workdir -PathType Container){ Write-Host "$workdir already exists"}Else{ New-Item -Path $workdir  -ItemType directory }
+
+# 2) Copy from source
+
+$source = "https://download.mozilla.org/?product=firefox-79.0-SSL&os=win64&lang=en-US";$destination = "c:\installer\firefox.exe";If(Get-Command 'Invoke-Webrequest'){Invoke-WebRequest $source -OutFile $destination}Else{$WebClient = New-Object System.Net.WebClient; $webclient.DownloadFile($source, $destination)}
+
+# 3) Silently install
+
+Start-Process -FilePath "c:\installer\firefox.exe" -ArgumentList "/S"
+Start-Sleep -s 35
+
+# 4) Clean up
+
+rm -Force "c:\installer\firefox*"
