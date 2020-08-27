@@ -23,10 +23,10 @@ SampleCommands.txt
 A demo which will: 
 
 - Change the Time Zone to Eastern Standard Time
-- Rename the Computer to "WS2019-01"
-- Restart the Computer
+- Rename the computer to "WS2019-01"
+- Restart the computer
 - Install Remote Server Admin Tools for Active Directory
-- Restart the Computer (again)
+- Restart the computer (again)
 - Create a directory "c:\installer"
 - Copy Firefox Installer to the directory
 - Install Firefox
@@ -42,7 +42,7 @@ A demo which will:
 - Install NuGet
 - Install PSWindowsUpdate
 - Install all pending updates
-- Restart the Computer
+- Restart the computer
 
 # AWS Step Functions and AWS Lambda Python Files
 
