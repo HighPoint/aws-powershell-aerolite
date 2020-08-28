@@ -73,7 +73,7 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 &nbsp;
 
-5) Navigate to the Step Functions. "Aerolite-PowerShell" should appear as an option under "State Machines." Select the "Aerolite-PowerShell" blue hyperlink. You will reach the page below:
+5) Navigate to Step Functions. "Aerolite-PowerShell" should appear as an option under "State Machines." Select the "Aerolite-PowerShell" blue hyperlink. You will reach the page below:
 
 ![Step Function Shot](/images/StepFunctionShot.png?raw=true)
 
