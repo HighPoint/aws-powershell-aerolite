@@ -40,7 +40,6 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 [![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
 
-&nbsp;
 
 1) Click the "Aerolite Launch Stack" button above.
 
@@ -98,6 +97,7 @@ Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_I
 
 7) Congratulations! The Aerolite Step Function will start executing the PowerShell commands. It's that easy.
 
+&nbsp;
 
 # Samples
 
