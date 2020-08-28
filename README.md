@@ -120,7 +120,7 @@ A demo which will:
 - Install Firefox
 - Clean up
 
-#
+&nbsp;
 
 ```
 SampleUpdate.txt
@@ -143,7 +143,7 @@ The Step Function file is included inline in the YAML Cloudformation template.
 ```
   AWSPowerShellAerolite.json
 ```
-#
+&nbsp;
 
 The AWS Lambda files are included inline in the YAML Cloudformation template.
 
@@ -161,7 +161,7 @@ They are include here for reference.
 
 Any questions or suggestions, just add an "Issues" submission to this repository. Thanks.
 
-#
+&nbsp;
 
 Happy Coding!
   
