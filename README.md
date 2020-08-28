@@ -101,7 +101,7 @@ Scroll so you can see the Input area and copy and paste following:
 
 &nbsp;
 
-Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_Instance_Id" with your values. If you don't have a PowerShell to test, try one of the samples below. Now, just press the "Start Execution" button.
+Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_Instance_Id" with your values. If you don't have a PowerShell file to test, try one of the samples below. Now, just press the "Start Execution" button.
 
 &nbsp;
 
