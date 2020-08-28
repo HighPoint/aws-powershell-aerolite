@@ -30,8 +30,6 @@ Otherwise, add the IAM role to the EC2 instance.
 
 Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for HTTPS traffic. If you are creating an EC2 manually, select:
 
-&nbsp;
-
 ![Security Group Port 443](/images/SecurityGroupShot.png?raw=true)
 
 &nbsp;
@@ -42,29 +40,47 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 [![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
 
+&nbsp;
+
 1) Click the "Aerolite Launch Stack" button above.
 
 This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
 
 ![CloudFormation Shot](/images/CloudFormationShot.png?raw=true)
 
+&nbsp;
+
 Checkmark the three "I acknowledgement" statements and select "Create Stack." This will start building the CloudFormation stack.
+
+&nbsp;
 
 2) Select or create a Windows EC2 to work with. Copy the EC2 Instance Id.
 
+&nbsp;
+
 3) Add the SSMInstancesQuickSetupRole to the EC2's IAM. The Requirements section of this Readme shows how to do this.
 
+&nbsp;
+
 4) Open the HTTPS port 443 in the EC2's Security Group.
+
+&nbsp;
 
 5) Navigate to the Step Functions. "Aerolite-PowerShell" should appear as an option under "State Machines." Select the "Aerolite-PowerShell" blue hyperlink. You will reach the page below:
 
 ![Step Function Shot](/images/StepFunctionShot.png?raw=true)
 
+&nbsp;
+
 Select the "Start Execution" button.
+
+&nbsp;
 
 6) The following screen will appear:
 
 ![Step Function Input Shot](/images/StepFunctionInputShot.png?raw=true)
+
+&nbsp;
 
 Scroll so you can see the Input area and copy and paste following:
 
@@ -75,7 +91,10 @@ Scroll so you can see the Input area and copy and paste following:
   "ec2Id":"Your_EC2_Instance_Id"
 }
 ```
+
 Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_Instance_Id" with your values. If you don't have a PowerShell to test, try one of the samples below. Now, just press the "Start Execution" button.
+
+&nbsp;
 
 7) Congratulations! The Aerolite Step Function will start executing the PowerShell commands. It's that easy.
 
