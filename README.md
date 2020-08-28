@@ -14,9 +14,9 @@ Easily add Aerolite to your Cloudformation stacks.
 
 # Requirements
 
-- **The Windows EC2 IAM role must include the AmazonSSMManagedInstanceCore policy**
+- **The EC2 IAM role must include the AmazonSSMManagedInstanceCore policy**
 
-The EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMInstancesQuickSetupRole, is included in the YAML Cloudformation template. SSMInstancesQuickSetupRole uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 manually after running the Cloudformation template, select: 
+The Windows EC2 must have an IAM role that allows the AWS System Manager to communicate with it. A role, SSMInstancesQuickSetupRole, is included in the YAML Cloudformation template. SSMInstancesQuickSetupRole uses the AWS policy, AmazonSSMManagedInstanceCore. If you are creating an EC2 manually after running the Cloudformation template, select: 
 
 ![SSMRoleForInstancesQuickSetup](/images/IAMRoleShot.png?raw=true)
 
