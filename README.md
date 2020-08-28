@@ -44,9 +44,9 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 2) Select or create a Windows EC2 to work with. Copy the EC2 Id.
 
-3) Add the SSMInstancesQuickSetupRole to the EC2. See the Requirements section on how to do this.
+3) Add the SSMInstancesQuickSetupRole to the EC2's IAM. The Requirements section of this Readme shows how to do this.
 
-4) Open port 443.
+4) Open HTTPS port 443 in the EC2's Security Group.
 
 
 # Samples
