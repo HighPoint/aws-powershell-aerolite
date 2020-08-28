@@ -96,6 +96,7 @@ The Step Function file is included inline in the YAML Cloudformation template.
 ```
   AWSPowerShellAerolite.json
 ```
+#
 
 The AWS Lambda files are included inline in the YAML Cloudformation template.
 
