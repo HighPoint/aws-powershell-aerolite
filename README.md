@@ -36,7 +36,16 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 1) Click the Aerolite Launch Stack Button above.
 
-This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen.
+This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
+
+![CloudFormation Shot](/images/CloudFormationShot.png)
+
+Click the three acknowledgement statements and select "Create Stack." This will start building the CloudFormation stack.
+
+2) Select or create a Windows EC2 to work with. Copy the EC2 Id.
+
+3) Add or 
+
 
 # Samples
 
@@ -85,6 +94,9 @@ The AWS Lambda files are included inline in the YAML Cloudformation template.
 ```
   
 They are include here for reference.
+
+# Questions
+
 
 
 Happy Coding!
