@@ -46,7 +46,9 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 3) Add the SSMInstancesQuickSetupRole to the EC2's IAM. The Requirements section of this Readme shows how to do this.
 
-4) Open HTTPS port 443 in the EC2's Security Group.
+4) Open the HTTPS port 443 in the EC2's Security Group.
+
+5) Navigate to AWS Step Functions.
 
 
 # Samples
