@@ -54,7 +54,13 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 Select the "Start Execution" button.
 
-
+```
+{
+  "Bucket":"Your_Bucket_Name",
+  "Key":"Your_Aerolite_PowerShell_File_Name",
+  "EC2Id":"Your_EC2_Id"
+}
+```
 
 
 # Samples
