@@ -42,7 +42,7 @@ This will bring you to either the Cloudformation UI or the AWS console if you ar
 
 Checkmark the three "I acknowledgement" statements and select "Create Stack." This will start building the CloudFormation stack.
 
-2) Select or create a Windows EC2 to work with. Copy the EC2 Id.
+2) Select or create a Windows EC2 to work with. Copy the EC2 Instance Id.
 
 3) Add the SSMInstancesQuickSetupRole to the EC2's IAM. The Requirements section of this Readme shows how to do this.
 
@@ -54,11 +54,14 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 Select the "Start Execution" button.
 
+6) The following screen will appear:
+
+
 ```
 {
   "Bucket":"Your_Bucket_Name",
   "Key":"Your_Aerolite_PowerShell_File_Name",
-  "ec2Id":"Your_EC2_Id"
+  "ec2Id":"Your_EC2_Instance_Id"
 }
 ```
 
