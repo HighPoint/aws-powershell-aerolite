@@ -36,6 +36,8 @@ Aerolite is agent-free, because it accesses the AWS System Manager installed alo
 
 If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your IP address or addresses.
 
+&nbsp;
+
 # How to Use
 
 1. Click the "Aerolite Launch Stack" button:
@@ -43,7 +45,6 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 [![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
 
 &nbsp;
-
 
 This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
 
@@ -133,6 +134,8 @@ A demo which will:
 - Install all pending updates
 - Restart the computer
 
+&nbsp;
+
 # AWS Step Functions and AWS Lambda Python Files
 
 The Step Function file is included inline in the YAML Cloudformation template.
@@ -151,6 +154,8 @@ The AWS Lambda files are included inline in the YAML Cloudformation template.
 ```
   
 They are include here for reference.
+
+&nbsp;
 
 # Questions
 
