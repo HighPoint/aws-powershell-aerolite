@@ -20,13 +20,21 @@ The Windows EC2 must have an IAM role that allows the AWS System Manager to comm
 
 ![SSMRoleForInstancesQuickSetup](/images/IAMRoleShot.png?raw=true)
 
+&nbsp;
+
 Otherwise, add the IAM role to the EC2 instance.
+
+&nbsp;
 
 - **Port 443 must be open**
 
 Aerolite is agent-free, because it accesses the AWS System Manager installed along with your EC2. The System Manager uses port 443 to communicate with Windows EC2 Instances. The EC2 Security Group must open port 443, the standard port for HTTPS traffic. If you are creating an EC2 manually, select:
 
+&nbsp;
+
 ![Security Group Port 443](/images/SecurityGroupShot.png?raw=true)
+
+&nbsp;
 
 If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your IP address or addresses.
 
