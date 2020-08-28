@@ -38,9 +38,11 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 # How to Use
 
-1. Click the "Aerolite Launch Stack" button below:
+1. Click the "Aerolite Launch Stack" button:
 &nbsp;
 [![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
+
+&nbsp;
 
 
 This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
