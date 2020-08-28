@@ -48,7 +48,9 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 4) Open the HTTPS port 443 in the EC2's Security Group.
 
-5) Navigate to AWS Step Functions.
+5) Navigate to the Step Functions. "Aerolite-PowerShell" should appear as an option under "State Machines." Select the "Aerolite-PowerShell" blue hyperlink.
+
+
 
 
 # Samples
