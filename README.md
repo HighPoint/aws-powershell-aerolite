@@ -34,17 +34,19 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 [![Aerolite Launch Stack](/images/Aerolite-Launch-Stack.png?raw=true)](https://console.aws.amazon.com/cloudformation/home?region=us-east-1#/stacks/new?stackName=AeroliteStack&templateURL=https://yappytest1234.s3.amazonaws.com/AWSPowerShellAerolite.yaml)
 
-1) Click the Aerolite Launch Stack Button above.
+1) Click the "Aerolite Launch Stack" button above.
 
 This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
 
 ![CloudFormation Shot](/images/CloudFormationShot.png)
 
-Click the three acknowledgement statements and select "Create Stack." This will start building the CloudFormation stack.
+Checkmark the three "I acknowledgement" statements and select "Create Stack." This will start building the CloudFormation stack.
 
 2) Select or create a Windows EC2 to work with. Copy the EC2 Id.
 
-3) Add or 
+3) Add the SSMInstancesQuickSetupRole to the EC2. See the Requirements section on how to do this.
+
+4) Open port 443.
 
 
 # Samples
