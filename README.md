@@ -38,7 +38,7 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 This will bring you to either the Cloudformation UI or the AWS console if you are not signed in. Sign in, if you are not already. From the Cloudformation UI, click "Next" at the bottom of the screen. Repeat clicking "Next" on the two following pages. You will reach a page with this towards the bottom:
 
-![CloudFormation Shot](/images/CloudFormationShot.png)
+![CloudFormation Shot](/images/CloudFormationShot.png?raw=true)
 
 Checkmark the three "I acknowledgement" statements and select "Create Stack." This will start building the CloudFormation stack.
 
@@ -50,12 +50,15 @@ Checkmark the three "I acknowledgement" statements and select "Create Stack." Th
 
 5) Navigate to the Step Functions. "Aerolite-PowerShell" should appear as an option under "State Machines." Select the "Aerolite-PowerShell" blue hyperlink. You will reach the page below:
 
-![Step Function Shot](/images/StepFunctionShot.png)
+![Step Function Shot](/images/StepFunctionShot.png?raw=true)
 
 Select the "Start Execution" button.
 
 6) The following screen will appear:
 
+![Step Function Input Shot](/images/StepFunctionInputShot.png?raw=true)
+
+Scroll so you can see the Input area and copy and paste following:
 
 ```
 {
@@ -64,6 +67,9 @@ Select the "Start Execution" button.
   "ec2Id":"Your_EC2_Instance_Id"
 }
 ```
+Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_Instance_Id" with your values. If you don't have a PowerShell to test, try one of the samples below. Now, just press the 
+
+7) Congratulations!
 
 
 # Samples
