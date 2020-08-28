@@ -97,7 +97,7 @@ Replace "Your_Bucket_Name", "Your_Aerolite_PowerShell_File_Name, and "Your_EC2_I
 
 &nbsp;
 
-7) Congratulations! The Aerolite Step Function will start executing the PowerShell commands. It's that easy.
+7) Congratulations! The Aerolite Step Function will start executing the PowerShell commands in the S3 file. It's that easy.
 
 &nbsp;
 
