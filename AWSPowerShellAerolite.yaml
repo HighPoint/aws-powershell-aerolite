@@ -373,4 +373,4 @@ Resources:
       Path: "/"
       Roles:
         -
-          Ref: EC2SSMRole
+          Ref: EC2SSMRole 
