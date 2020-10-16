@@ -7,7 +7,7 @@ Easily run Microsoft Powershell commands on AWS Windows EC2 instances.
 Aerolite retries any failed PowerShell commands, logs all issues to CloudWatch and runs agent-free. It uses the native AWS Step Functions, Lambda, and System Manager to send, listen, and react to PowerShell commands. Below is the AWS Step Function Graph, showing how Aerolite works.
 
 
-![Aerolite Step Functions Graph](/images/aerolite_graph.png)
+![Aerolite Step Functions Graph](/images/aerolite_graph.png) 
 
 
 First, Aerolite opens a text file in an S3 bucket. It removes the comments, creating a list of commands. Next, Aerolite executes each PowerShell command individually. It waits for confirmation that the command successfully executed or failed. If the command failed, it will retry the command up to three times. Aerolite then logs all issues to a CloudWatch Log. If the command requires an Windows restart, Aerolite will wait for the EC2 to be available for PowerShell commands. 
