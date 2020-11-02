@@ -1,5 +1,5 @@
 import json
-import boto3
+import boto3 
 import time
 
 class NoWindowsResponse(Exception): pass
