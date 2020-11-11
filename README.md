@@ -42,7 +42,7 @@ If you use Remote Desktop Protocol, RDP Port 3389 should also be opened to your 
 
 &nbsp;
 
-# How to Use
+# How to Use 
 
 1. Click the "Aerolite Launch Stack" button:
 &nbsp;
